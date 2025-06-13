@@ -1,0 +1,124 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Bookings {
+  id             Int       @id @default(autoincrement())
+  roomId         Int
+  userId         Int
+  guest_count    Int?      @default(1)
+  check_in_date  DateTime  @default(now()) @db.Timestamp(0)
+  check_out_date DateTime  @default(now()) @db.Timestamp(0)
+  content        String?   @db.VarChar(255)
+  deletedBy      Int       @default(0)
+  isDeleted      Boolean   @default(false)
+  deletedAt      DateTime? @db.Timestamp(0)
+  createdAt      DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt      DateTime  @default(now()) @db.Timestamp(0)
+  Rooms          Rooms     @relation(fields: [roomId], references: [roomId], onDelete: NoAction, onUpdate: NoAction, map: "Bookings_ibfk_1")
+  Users          Users     @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "Bookings_ibfk_2")
+
+  @@index([roomId], map: "roomId")
+  @@index([userId], map: "userId")
+}
+
+model Comments {
+  id        Int       @id @default(autoincrement())
+  roomId    Int
+  userId    Int
+  content   String?   @db.VarChar(255)
+  rating    Int?
+  date      DateTime  @default(now()) @db.Timestamp(0)
+  deletedBy Int       @default(0)
+  isDeleted Boolean   @default(false)
+  deletedAt DateTime? @db.Timestamp(0)
+  createdAt DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt DateTime  @default(now()) @db.Timestamp(0)
+  Rooms     Rooms     @relation(fields: [roomId], references: [roomId], onDelete: NoAction, onUpdate: NoAction, map: "Comments_ibfk_1")
+  Users     Users     @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "Comments_ibfk_2")
+
+  @@index([roomId], map: "roomId")
+  @@index([userId], map: "userId")
+}
+
+model Property {
+  id            Int       @id @default(autoincrement())
+  property_name String    @db.VarChar(255)
+  address       String?   @db.VarChar(255)
+  city          String?   @db.VarChar(100)
+  country       String?   @db.VarChar(100)
+  images        String?   @db.VarChar(255)
+  deletedBy     Int       @default(0)
+  isDeleted     Boolean   @default(false)
+  deletedAt     DateTime? @db.Timestamp(0)
+  createdAt     DateTime  @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime  @default(now()) @db.Timestamp(0)
+  Rooms         Rooms[]
+}
+
+model Roles {
+  roleId      Int      @id @default(autoincrement())
+  name        String?  @db.VarChar(255)
+  description String?  @db.VarChar(256)
+  isAction    Boolean? @default(true)
+  deleteBy    Int      @default(0)
+  isDelete    Boolean  @default(false)
+  deleteAt    DateTime @default(now()) @db.Timestamp(0)
+  createAt    DateTime @default(now()) @db.Timestamp(0)
+  updateAt    DateTime @default(now()) @db.Timestamp(0)
+  Users       Users[]
+}
+
+model Rooms {
+  roomId          Int        @id @default(autoincrement())
+  id              Int
+  name            String     @db.VarChar(255)
+  max_guests      Int?       @default(2)
+  bedrooms        Int?       @default(1)
+  beds            Int?       @default(1)
+  bathrooms       Int?       @default(1)
+  description     String?    @db.VarChar(255)
+  price           Int?
+  wifi            Boolean?   @default(true)
+  tivi            Boolean?   @default(true)
+  air_conditioner Boolean?   @default(true)
+  kitchen         Boolean?   @default(true)
+  images          String?    @db.VarChar(255)
+  deletedBy       Int        @default(0)
+  isDeleted       Boolean    @default(false)
+  deletedAt       DateTime?  @db.Timestamp(0)
+  createdAt       DateTime   @default(now()) @db.Timestamp(0)
+  updatedAt       DateTime   @default(now()) @db.Timestamp(0)
+  Bookings        Bookings[]
+  Comments        Comments[]
+  Property        Property   @relation(fields: [id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "Rooms_ibfk_1")
+
+  @@index([id], map: "id")
+}
+
+model Users {
+  userId      Int        @id @default(autoincrement())
+  fullName    String     @db.VarChar(255)
+  email       String     @unique(map: "email") @db.VarChar(255)
+  password    String     @db.VarChar(255)
+  numberPhone String?    @db.VarChar(255)
+  birthday    String?    @db.VarChar(255)
+  gender      String?    @db.VarChar(255)
+  avatar      String?    @db.VarChar(255)
+  roleId      Int        @default(2)
+  deletedBy   Int        @default(0)
+  isDeleted   Boolean    @default(false)
+  deletedAt   DateTime?  @db.Timestamp(0)
+  createdAt   DateTime   @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime   @default(now()) @db.Timestamp(0)
+  Bookings    Bookings[]
+  Comments    Comments[]
+  Roles       Roles      @relation(fields: [roleId], references: [roleId], onDelete: NoAction, onUpdate: NoAction, map: "Users_ibfk_1")
+
+  @@index([roleId], map: "roleId")
+}
