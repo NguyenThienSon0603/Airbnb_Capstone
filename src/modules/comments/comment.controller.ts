@@ -1,7 +1,15 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import CommentService from './comment.service';
 import { ApiBearerAuth, ApiHeader, ApiTags } from '@nestjs/swagger';
-import { CommentDto } from './dto/comment.dto';
+import { CommentCreateDto, CommentUpdateDto } from './dto/comment.dto';
 import { GetUser } from 'src/common/decorator/getUser.decorator';
 
 @ApiTags('Comments')
@@ -11,20 +19,33 @@ export default class CommentController {
   constructor(private readonly commentService: CommentService) {}
 
   @Get()
-  // @ApiHeader({
-  //   name: 'Authorization',
-  //   description: 'Nhập accessToken',
-  //   required: true,
-  // })
   async findAll() {
     return await this.commentService.findAll();
   }
 
+  @Get('/:id')
+  async findOne(@Param('id') id: number) {
+    return await this.commentService.findOne(id);
+  }
+
   @Post()
   async create(
-    @Body() commentDTO: CommentDto,
+    @Body() commentCreateDto: CommentCreateDto,
     @GetUser('userId') userId: number,
   ) {
-    return await this.commentService.create(commentDTO, userId);
+    return await this.commentService.create(commentCreateDto, userId);
+  }
+
+  @Put('/:id')
+  async update(
+    @Param('id') id: number,
+    @Body() commentUpdateDto: CommentUpdateDto,
+  ) {
+    return await this.commentService.update(id, commentUpdateDto);
+  }
+
+  @Delete('/:id')
+  async delete(@Param('id') id: number,@GetUser('userId') userId: number,) {
+    return await this.commentService.delete(id,userId);
   }
 }
