@@ -10,12 +10,6 @@ export class CommentCreateDto {
   roomId: number;
 
   @ApiProperty()
-  @Type(() => Number)
-  @IsNumber()
-  @IsNotEmpty()
-  userId: number;
-
-  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   content: string;

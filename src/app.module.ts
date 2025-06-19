@@ -6,9 +6,10 @@ import { TokenModule } from './modules/token/token.module';
 import CommentModule from './modules/comments/comment.module';
 import { ProtectStrategy } from './common/protectAPI/protectApi.strategy';
 import { PrismaService } from './modules/prisma/prisma.service';
+import BookingModule from './modules/bookings/booking.module';
 
 @Module({
-  imports: [AuthModule, TokenModule, CommentModule],
+  imports: [AuthModule, TokenModule, CommentModule, BookingModule],
   controllers: [AppController],
   providers: [AppService, PrismaService, ProtectStrategy],
 })
