@@ -25,11 +25,6 @@ export class CommentUpdateDto {
   @ApiProperty()
   @Type(() => Number)
   @IsNumber()
-  roomId: number;
-
-  @ApiProperty()
-  @Type(() => Number)
-  @IsNumber()
   userId: number;
 
   @ApiProperty()

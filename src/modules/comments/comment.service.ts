@@ -84,7 +84,7 @@ export default class CommentService {
   }
 
   async update(id: number | string, commentUpdateDto: CommentUpdateDto) {
-    const { content, rating, roomId, userId } = commentUpdateDto;
+    const { content, rating, userId } = commentUpdateDto;
 
     // kiểm tra comment có tồn tại không
     const commentExist = await this.prisma.comments.findFirst({
@@ -97,7 +97,6 @@ export default class CommentService {
       where: {
         id: Number(id),
         userId: Number(userId),
-        roomId: Number(roomId),
       },
     });
     if (!isOwner)
@@ -136,6 +135,16 @@ export default class CommentService {
       },
     });
     if (!commentExist) throw new BadRequestException('Comment not found.');
+
+    // kiểm tra comment có phải của user không
+    const isOwner = await this.prisma.comments.findFirst({
+      where: {
+        id: Number(id),
+        userId: Number(userId),
+      },
+    });
+    if (!isOwner)
+      throw new UnauthorizedException('Bạn không có quyền xóa comment này.');
 
     // xóa mềm dữ liệu
     await this.prisma.comments.update({

@@ -39,10 +39,14 @@ export class BookingUpdateDto {
   guest_count: number;
 
   @ApiProperty()
-  check_in_date: string;
+  @Type(() => Date)
+  @IsDate()
+  check_in_date: Date;
 
   @ApiProperty()
-  check_out_date: string;
+  @Type(() => Date)
+  @IsDate()
+  check_out_date: Date;
 
   @ApiProperty()
   @IsString()

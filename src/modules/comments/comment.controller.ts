@@ -45,7 +45,7 @@ export default class CommentController {
   }
 
   @Delete('/:id')
-  async delete(@Param('id') id: number,@GetUser('userId') userId: number,) {
-    return await this.commentService.delete(id,userId);
+  async delete(@Param('id') id: number, @GetUser('userId') userId: number) {
+    return await this.commentService.delete(id, userId);
   }
 }

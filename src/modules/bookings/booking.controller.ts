@@ -1,7 +1,15 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import BookingService from './booking.service';
-import { BookingCreateDto } from './dto/booking.dto';
+import { BookingCreateDto, BookingUpdateDto } from './dto/booking.dto';
 import { GetUser } from 'src/common/decorator/getUser.decorator';
 
 @ApiTags('Bookings')
@@ -26,5 +34,24 @@ export default class BookingController {
     @GetUser('userId') userId: number,
   ) {
     return await this.bookingService.create(bookingCreateDto, userId);
+  }
+
+  @Put('/:id')
+  async update(
+    @Param('id') id: number,
+    @GetUser('userId') userId: number,
+    @Body() bookingUpdateDto: BookingUpdateDto,
+  ) {
+    return await this.bookingService.update(id, userId, bookingUpdateDto);
+  }
+
+  @Delete('/:id')
+  async delete(@Param('id') id: number, @GetUser('userId') userId: number) {
+    return await this.bookingService.delete(id, userId);
+  }
+
+  @Get('get-by-user/:id')
+  async findByUser(@Param('id') userId: number) {
+    return await this.bookingService.findByUser(userId);
   }
 }
