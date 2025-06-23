@@ -14,7 +14,7 @@ import { GetUser } from 'src/common/decorator/getUser.decorator';
 
 @ApiTags('Comments')
 @ApiBearerAuth('accessToken')
-@Controller('/comment')
+@Controller('/comments')
 export default class CommentController {
   constructor(private readonly commentService: CommentService) {}
 

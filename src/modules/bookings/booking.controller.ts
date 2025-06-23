@@ -14,7 +14,7 @@ import { GetUser } from 'src/common/decorator/getUser.decorator';
 
 @ApiTags('Bookings')
 @ApiBearerAuth('accessToken')
-@Controller('/booking')
+@Controller('/bookings')
 export default class BookingController {
   constructor(private readonly bookingService: BookingService) {}
 

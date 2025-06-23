@@ -26,6 +26,7 @@ class AuthService {
         birthday: true,
         avatar: true,
         gender: true,
+        isDeleted: true,
         Roles: {
           select: {
             name: true,
@@ -36,6 +37,12 @@ class AuthService {
     });
 
     if (!userExist)
+      throw new BadRequestException(
+        'Tài khoản không tồn tại, vui lòng đăng kí',
+      );
+
+    // kiểm tra tài khoản đã tồn tại nhưng bị xóa
+    if (userExist.isDeleted === true)
       throw new BadRequestException(
         'Tài khoản không tồn tại, vui lòng đăng kí',
       );
