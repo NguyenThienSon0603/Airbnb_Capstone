@@ -1,0 +1,195 @@
+{
+	"info": {
+		"_postman_id": "3fce4062-e4cb-471a-af33-d93486e51835",
+		"name": "Comments",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42962494",
+		"_collection_link": "https://www.postman.com/nodejs50sequelize/workspace/airbnb-capstone/collection/42962494-3fce4062-e4cb-471a-af33-d93486e51835?action=share&source=collection_link&creator=42962494"
+	},
+	"item": [
+		{
+			"name": "Find All",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"fullName\": \"Thien Son\",\r\n  \"email\": \"son@gmail.com\",\r\n  \"password\": \"123\",\r\n  \"numberPhone\": \"0976915423\",\r\n  \"birthday\": \"06/03/1993\",\r\n  \"gender\": \"Male\"\r\n}"
+				},
+				"url": {
+					"raw": "{{domain}}/comments",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"roomId\": 2,\r\n  \"userId\": 8,\r\n  \"content\": \"test comment\",\r\n  \"rating\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/comments",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find One",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/comments/8",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"comments",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"roomId\": \"3\",\r\n  \"userId\": \"13\",\r\n  \"content\": \"update comment\",\r\n  \"rating\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/comments/16",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"comments",
+						"16"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"roomId\": \"3\",\r\n  \"userId\": \"2\",\r\n  \"content\": \"test comment\",\r\n  \"rating\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/comments/20",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"comments",
+						"20"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

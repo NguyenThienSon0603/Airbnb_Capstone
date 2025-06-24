@@ -20,6 +20,7 @@ import { Request } from 'express';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { UploadAvatarDto } from './dto/upload-avatar.dto';
 import uploadLocal from '../multer/local.multer';
+import { SearchUserDto } from './dto/search-user.dto';
 
 @ApiTags('Users')
 @ApiBearerAuth('accessToken')
@@ -30,6 +31,11 @@ export default class UserController {
   @Get()
   async findAll() {
     return await this.userService.findAll();
+  }
+
+  @Get('/search-user/')
+  async searchUser(@Query('keyword') keyword: string) {
+    return await this.userService.searchUser(keyword);
   }
 
   @Get('/search/')

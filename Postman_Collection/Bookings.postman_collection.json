@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "123a1ee7-26df-4a6f-a018-45fd61849c4d",
+		"name": "Bookings",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42962494",
+		"_collection_link": "https://www.postman.com/nodejs50sequelize/workspace/airbnb-capstone/collection/42962494-123a1ee7-26df-4a6f-a018-45fd61849c4d?action=share&source=collection_link&creator=42962494"
+	},
+	"item": [
+		{
+			"name": "Find All",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{domain}}/bookings",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find By User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{domain}}/bookings/get-by-user/13",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"bookings",
+						"get-by-user",
+						"13"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find One",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{domain}}/bookings/6",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"bookings",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"roomId\": 3,\r\n    \"guest_count\": 3,\r\n    \"check_in_date\": \"2025-06-22T16:12:39.000Z\",\r\n    \"check_out_date\": \"2025-06-24T16:12:39.000Z\",\r\n    \"content\": \"Toi muon dat phong may lanh, phòng có tivi và máy nước nóng\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/bookings",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"guest_count\": 1,\r\n    \"check_in_date\": \"2025-06-22T16:12:39.000Z\",\r\n    \"check_out_date\": \"2025-06-25T16:12:39.000Z\",\r\n    \"content\": \"phòng có tivi và máy nước nóng\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/bookings/19",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"bookings",
+						"19"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/bookings/13",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"bookings",
+						"13"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

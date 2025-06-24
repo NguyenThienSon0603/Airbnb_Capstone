@@ -1,0 +1,92 @@
+{
+	"info": {
+		"_postman_id": "3c9e971b-1621-464c-9a27-5f01d52c869d",
+		"name": "Auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42962494",
+		"_collection_link": "https://www.postman.com/nodejs50sequelize/workspace/airbnb-capstone/collection/42962494-3c9e971b-1621-464c-9a27-5f01d52c869d?action=share&source=collection_link&creator=42962494"
+	},
+	"item": [
+		{
+			"name": "Sign In",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const res = pm.response.json();\r",
+							"const accessToken = res.data.accessToken;\r",
+							"const refreshToken = res.data.refreshToken;\r",
+							"\r",
+							"pm.globals.set(\"accessToken\",accessToken);\r",
+							"pm.globals.set(\"refreshToken\",refreshToken);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"son@gmail.com\",\r\n    \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/auth/signin",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"fullName\": \"Thien Son\",\r\n  \"email\": \"admin@gmail.com\",\r\n  \"password\": \"123\",\r\n  \"numberPhone\": \"0976915423\",\r\n  \"birthday\": \"06/03/1993\",\r\n  \"gender\": \"Male\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{domain}}/auth/signup",
+					"host": [
+						"{{domain}}"
+					],
+					"path": [
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

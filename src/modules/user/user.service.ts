@@ -9,6 +9,7 @@ import { UserCreateDto, UserUpdateDto } from './dto/user.dto';
 import * as bcrypt from 'bcrypt';
 import * as path from 'path';
 import * as fs from 'fs';
+import { IsEmail, isPhoneNumber } from 'class-validator';
 
 @Injectable()
 export default class UserService {
@@ -218,5 +219,36 @@ export default class UserService {
       filename: file.filename,
       imgUrl: `images/${file.filename}`,
     };
+  }
+
+  async searchUser(keyword: string) {
+    const isNumberPhone = /^[0-9]{9,11}$/.test(keyword);
+    const isEmail = keyword.includes('@');
+
+    // Tìm theo numberPhone
+    if (isNumberPhone) {
+      return await this.prisma.users.findMany({
+        where: { numberPhone: { contains: keyword }, isDeleted: false },
+      });
+    }
+
+    // Tìm theo Email
+    if (isEmail) {
+      return await this.prisma.users.findMany({
+        where: { email: { contains: keyword }, isDeleted: false },
+      });
+    }
+
+    // Tìm theo nhiều cột
+    return await this.prisma.users.findMany({
+      where: {
+        isDeleted: false,
+        OR: [
+          { fullName: { contains: keyword } },
+          { email: { contains: keyword } },
+          { numberPhone: { contains: keyword } },
+        ],
+      },
+    });
   }
 }
